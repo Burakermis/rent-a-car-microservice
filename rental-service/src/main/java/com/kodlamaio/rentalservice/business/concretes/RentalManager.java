@@ -65,14 +65,16 @@ public class RentalManager implements RentalService {
         rental.setRentedAt(LocalDate.now());
 
         GetCarResponse car = carClient.getById(request.getCarId());
-
         var paymentRequest = new CreateRentalPaymentRequest();
         mapper.forRequest().map(request.getGetCardInfo(), paymentRequest);
         paymentRequest.setPrice(getTotalPrice(rental));
+        // Feign client kullanarak ödeme gerçekleştiriliyor
         rules.ensurePayment(paymentRequest);
-
         repository.save(rental);
+
+        // Fatura oluşturuluyor
         sendKafkaInvoiceCreatedEvent(rental, car, request.getGetCardInfo().getCardHolder());
+
         sendKafkaRentalCreatedEvent(request.getCarId());
         var response = mapper.forResponse().map(rental, CreateRentalResponse.class);
 
