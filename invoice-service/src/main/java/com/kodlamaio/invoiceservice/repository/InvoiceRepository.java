@@ -1,11 +1,11 @@
 package com.kodlamaio.invoiceservice.repository;
 
 import com.kodlamaio.invoiceservice.entities.Invoice;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface InvoiceRepository extends ElasticsearchRepository<Invoice, UUID> {
+public interface InvoiceRepository extends MongoRepository<Invoice, UUID> {
     List<Invoice> findAll();
 }

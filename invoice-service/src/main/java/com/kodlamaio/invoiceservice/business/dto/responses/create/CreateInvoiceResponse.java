@@ -1,4 +1,4 @@
-package com.kodlamaio.invoiceservice.business.dto.responses;
+package com.kodlamaio.invoiceservice.business.dto.responses.create;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package com.kodlamaio.invoiceservice.business.dto.responses;
+package com.kodlamaio.invoiceservice.business.dto.responses.get;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetInvoiceResponse {
+public class GetAllInvoicesResponse {
     private UUID id;
     private String cardHolder;
     private String modelName;

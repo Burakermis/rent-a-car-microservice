@@ -1,19 +1,19 @@
-package com.kodlamaio.invoiceservice.business.dto.responses;
+package com.kodlamaio.invoiceservice.business.dto.requests.create;
 
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
 
-import java.time.LocalDate;
-import java.util.UUID;
+import java.time.LocalDateTime;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateInvoiceResponse {
-    private UUID id;
+public class CreateInvoiceRequest {
     private String cardHolder;
     private String modelName;
     private String brandName;
@@ -21,5 +21,5 @@ public class UpdateInvoiceResponse {
     private int modelYear;
     private double dailyPrice;
     private int rentedForDays;
-    private LocalDate rentedAt;
+    private LocalDateTime rentedAt;
 }

@@ -1,14 +1,14 @@
 package com.kodlamaio.invoiceservice.api.controllers;
 
 import com.kodlamaio.invoiceservice.business.abstracts.InvoiceService;
-import com.kodlamaio.invoiceservice.business.dto.requests.UpdateInvoiceRequest;
-import com.kodlamaio.invoiceservice.business.dto.responses.CreateInvoiceResponse;
-import com.kodlamaio.invoiceservice.business.dto.responses.GetAllInvoicesResponse;
-import com.kodlamaio.invoiceservice.business.dto.responses.GetInvoiceResponse;
-import com.kodlamaio.invoiceservice.business.dto.responses.UpdateInvoiceResponse;
-import com.kodlamaio.invoiceservice.entities.Invoice;
+import com.kodlamaio.invoiceservice.business.dto.requests.create.CreateInvoiceRequest;
+import com.kodlamaio.invoiceservice.business.dto.requests.update.UpdateInvoiceRequest;
+import com.kodlamaio.invoiceservice.business.dto.responses.create.CreateInvoiceResponse;
+import com.kodlamaio.invoiceservice.business.dto.responses.get.GetAllInvoicesResponse;
+import com.kodlamaio.invoiceservice.business.dto.responses.get.GetInvoiceResponse;
+import com.kodlamaio.invoiceservice.business.dto.responses.update.UpdateInvoiceResponse;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +16,16 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/api/invoices")
 public class InvoicesController {
     private final InvoiceService service;
 
+//    MongoDB collection oluşması için sadece ilk çalıştırmada kullanılıyor!!!
+//    @PostConstruct
+//    public void createDb(){
+//        service.add(new Invoice());
+//    }
     @GetMapping
     public List<GetAllInvoicesResponse> getAll() {
         return service.getAll();
@@ -33,8 +38,8 @@ public class InvoicesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateInvoiceResponse add(@Valid @RequestBody Invoice invoice) {
-        return service.add(invoice);
+    public CreateInvoiceResponse add(@Valid @RequestBody CreateInvoiceRequest request) {
+        return service.add(request);
     }
 
     @PutMapping

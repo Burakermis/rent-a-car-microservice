@@ -4,7 +4,7 @@ package com.kodlamaio.invoiceservice.business.kafka.consumer;
 import com.kodlamaio.commonpackage.events.invoice.InvoiceCreatedEvent;
 import com.kodlamaio.commonpackage.utils.mappers.ModelMapperService;
 import com.kodlamaio.invoiceservice.business.abstracts.InvoiceService;
-import com.kodlamaio.invoiceservice.entities.Invoice;
+import com.kodlamaio.invoiceservice.business.dto.requests.create.CreateInvoiceRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -21,8 +21,8 @@ public class RentalConsumer {
             groupId = "invoice-rental-create"
     )
     public void consume(InvoiceCreatedEvent event) {
-        Invoice invoice = mapper.forRequest().map(event, Invoice.class);
-        service.add(invoice);
+        CreateInvoiceRequest request = mapper.forRequest().map(event, CreateInvoiceRequest.class);
+        service.add(request);
         log.info("Invoice created event consumed {}", event);
     }
 }
